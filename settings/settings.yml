@@ -1,0 +1,8 @@
+port: 8080
+debug: false
+database:
+  host: localhost
+  port: 5433
+  user: steand
+  password: steandpgsql
+  name: collabtasks_bd
