@@ -15,18 +15,26 @@ func NewDatabase(ctx context.Context,s *settings.Settings)(* gorm.DB, error) {
 		"password=%s dbname=%s sslmode=disable",
 		s.DB.Host, s.DB.Port, s.DB.User, s.DB.Password, s.DB.Name)
 
-		DB, err := gorm.Open(postgres.Open(datasource), &gorm.Config{})
+		DB, err := gorm.Open(postgres.Open(datasource), &gorm.Config{
+			
+		})
 		if err!=nil{
 			return nil,err
 		}
 		return DB,err
 }
 
+
+
 func CloseDB() error {
-    db, err := DB.DB() // devielve el pool de conexiones 
+    db, err := DB.DB() // devuelve el pool de conexiones 
     if err != nil {
         return err
     }
     
     return db.Close()
+}
+
+type Namer interface {
+	TableName(table string) string
 }
