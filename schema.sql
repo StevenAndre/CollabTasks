@@ -56,7 +56,7 @@ CREATE TABLE evidences(
     task_id varchar(10) not null,
     created_at TIMESTAMP not null,
     CONSTRAINT pk_evidences PRIMARY KEY(id_evidence),
-    CONSTRAINT fk_task_evidence FOREIGN KEY (task_id) REFERENCES tasks(task_id)
+    CONSTRAINT fk_task_evidence FOREIGN KEY (id_task) REFERENCES tasks(task_id)
 
 );
 
