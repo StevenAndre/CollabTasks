@@ -6,6 +6,7 @@ import (
 
 	"github.com/StevenAndre/collabtasks/database"
 	"github.com/StevenAndre/collabtasks/internal/entity"
+	"github.com/StevenAndre/collabtasks/internal/repository"
 	"github.com/StevenAndre/collabtasks/settings"
 )
 
@@ -94,6 +95,17 @@ func main() {
 	}
 
 	}
+
+	fmt.Println("PROBANDO USERS-------------------LISNTADO TODOS:")
+	
+	rp:=repository.NewGormUserRepository(db)
+
+	userFind,err:=rp.GetUserByID(context.Background(),"USR0")
+	if err!=nil{
+		panic(err)
+	}
+	fmt.Println(userFind)
+	
 
 /*
 	fmt.Println("------------------------PROJECTS------------------------")
