@@ -18,6 +18,7 @@ CREATE TABLE notifications(
     message varchar(300)not null,
     issued TIMESTAMP not null,
     id_user varchar(4) not null,
+    is_read BOOLEAN DEFAULT FALSE,
     CONSTRAINT pk_notifications PRIMARY KEY(id_notification),
     CONSTRAINT fk_user_notofocations FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
     
@@ -90,4 +91,27 @@ CREATE TABLE assigned_project(
     CONSTRAINT fk_project_assignments FOREIGN KEY (id_project) REFERENCES projects(id_project),
     CONSTRAINT fk_team_assignments FOREIGN KEY (id_team) REFERENCES teams(id_team)
 
+);
+
+CREATE TABLE private_messages(
+   pm_id varchar(10)not null,
+   message text not null,
+   sender_id varchar(4) not null,
+   receiver_id varchar(4) not null,
+   isRead boolean default false,
+   sent_date TIMESTAMP not null,
+   CONSTRAINT pk_private_messages PRIMARY KEY(pm_id),
+   CONSTRAINT fk_sender_privatesmessages FOREIGN KEY (sender_id) REFERENCES users(id_user),
+   CONSTRAINT fk_receiver_privatesmessages FOREIGN KEY (receiver_id) REFERENCES users(id_user)
+);
+
+CREATE TABLE team_messages(
+    tm_id  varchar(10)not null,
+    team_id varchar(8) not null,
+    member_id varchar(4) not null,
+    message text not null,
+    send_date TIMESTAMP NOT NULL,
+    CONSTRAINT pk_team_messages PRIMARY KEY(tm_id),
+    CONSTRAINT fk_team_messagess FOREIGN KEY (team_id) REFERENCES teams(id_team),
+    CONSTRAINT fk_member_messagess FOREIGN KEY (member_id) REFERENCES users(id_user)
 );
