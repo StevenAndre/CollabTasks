@@ -29,9 +29,14 @@ func main() {
 
 	var users []entity.User
 	var projects []entity.Project
+	
+	
+
 
 	projRs:=db.Find(&projects)
 	result := db.Preload("Notifications").Preload("TeamMembers").Preload("Projects.Tasks.Evidences").Preload("Projects").Preload("Projects.AssignedProjects").Find(&users)
+
+	
 
 	if result.Error != nil {
 		panic("Failed to fetch users")
@@ -100,11 +105,17 @@ func main() {
 	
 	rp:=repository.NewGormUserRepository(db)
 
+
 	userFind,err:=rp.GetUserByID(context.Background(),"USR0")
 	if err!=nil{
 		panic(err)
 	}
 	fmt.Println(userFind)
+	/*
+	err=rp.DeleteUser(context.Background(),"USR4")
+	if err!=nil{
+		panic(err)
+	}*/
 	
 
 /*

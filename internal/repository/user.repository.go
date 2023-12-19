@@ -40,5 +40,8 @@ func (ur *GormUserRepository) GetAllUsers(ctx context.Context)(*[]entity.User,er
 	return &users,result.Error
 }
 func (ur *GormUserRepository) DeleteUser(ctx context.Context, id_user string) error{
-	return nil
+	rs:=ur.db.Delete(&entity.User{
+		UserID: id_user,
+	})
+	return rs.Error
 }
