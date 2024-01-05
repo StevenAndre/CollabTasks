@@ -12,6 +12,8 @@ type UserRepository interface {
 	GetUserByID(ctx context.Context, id_user string) (*entity.User, error)
 	GetAllUsers(ctx context.Context)(*[]entity.User,error)
 	DeleteUser(ctx context.Context, id_user string) error
+	GetUserByEmail(ctx context.Context, email string) (*entity.User, error)
+	GetUserByUsername(ctx context.Context,username string) (*entity.User, error)
 }
 
 type NotificationRepository interface{
