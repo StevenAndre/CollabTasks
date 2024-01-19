@@ -15,3 +15,10 @@ type UserService interface {
 	UpdateUser(ctx context.Context,userDto dtos.UserUpdateDto, userID string,file *multipart.FileHeader)error
 	DeleteUser(ctx context.Context,userID string)error
 }
+
+type ProjectService interface{
+	AddProject(ctx context.Context, project_dto dtos.ProjectDto)error
+	GetProjectsByUser(ctx context.Context,user_id string) (*[]model.Project ,error)
+	GetProjectByID(ctx context.Context,proj_id string) (*model.Project, error)
+	DeleteProject(ctx context.Context, proj_id string) error
+}

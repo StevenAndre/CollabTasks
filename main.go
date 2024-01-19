@@ -25,7 +25,7 @@ func main() {
 		panic(err)
 	}
 	userRepo:=repository.NewGormUserRepository(db)
-	userService:=service.NewUserService(userRepo)
+	userService:=service.NewUserService(&userRepo)
 	e:=echo.New()
 	_=api.NewUserController(e,userService)
 	api.Start(e,":8080")

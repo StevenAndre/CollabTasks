@@ -59,9 +59,7 @@ func (ur *GormUserRepository) DeleteUser(ctx context.Context, id_user string) er
 	rs:=ur.db.Delete(&entity.User{
 		UserID: id_user,
 	})
-	if rs.RowsAffected==0{
-		return nil
-	}
+	
 	return rs.Error
 }
 
