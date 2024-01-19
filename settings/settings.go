@@ -9,24 +9,31 @@ import (
 //go:embed settings.yml
 var settingFile []byte
 
-type Settings struct{
-	DB DatabaseConfig    `yaml:"database"`
-	Port int			 `yaml:"port"`
+type Settings struct {
+	DB   DatabaseConfig `yaml:"database"`
+	Port int            `yaml:"port"`
 }
 
-type DatabaseConfig struct{
-	Host string `yaml:"host"`
-	Port int    `yaml:"port"`
-	User string `yaml:"user"`
+type DatabaseConfig struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	User     string `yaml:"user"`
 	Password string `yaml:"password"`
-	Name string `yaml:"name"`
+	Name     string `yaml:"name"`
 }
 
-func NewSettings() (*Settings,error){
+//go:embed pathimages.txt
+var pathimages string
+
+func GetPathImages() string {
+	return pathimages
+}
+
+func NewSettings() (*Settings, error) {
 	settings := &Settings{}
-	err := yaml.Unmarshal(settingFile,&settings)
+	err := yaml.Unmarshal(settingFile, &settings)
 	if err != nil {
 		return nil, err
 	}
-	return settings,nil
+	return settings, nil
 }

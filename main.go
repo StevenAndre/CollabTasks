@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	
 
 	"github.com/StevenAndre/collabtasks/database"
 	"github.com/StevenAndre/collabtasks/internal/api"
@@ -18,7 +18,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(s)
 
 	db, err := database.NewDatabase(context.Background(), s)
 	if err != nil {
