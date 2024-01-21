@@ -12,14 +12,31 @@ type UserController struct {
 	datavalid *validator.Validate
 }
 
-func NewUserController(e *echo.Echo, sv service.UserService)*UserController{
+var dataValis =validator.New()
+
+func NewUserController(e *echo.Echo, sv *service.UserService)*UserController{
 	userController:=&UserController{
-		sv: sv,
-		datavalid: validator.New(),
+		sv: *sv,
+		datavalid: dataValis,
 	}
 	userController.RegisterRoutes(e)
 	return userController
 }
+
+type ProjectController struct{
+	sv service.ProjectService
+	datavalid *validator.Validate
+}
+
+func NewProjectController(e *echo.Echo, sv *service.ProjectService)*ProjectController{
+	ProjectController:= &ProjectController{
+		sv: *sv,
+		datavalid: dataValis,
+	}
+	ProjectController.RegisterRoutes(e)
+	return ProjectController
+}
+
 
 
 func Start(e *echo.Echo,address string)error{

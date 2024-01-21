@@ -25,8 +25,11 @@ func main() {
 	}
 	userRepo:=repository.NewGormUserRepository(db)
 	userService:=service.NewUserService(&userRepo)
+	projectRepo:=repository.NewGormProjectRepository(db)
+	projectService:=service.NewProjectService(&projectRepo,&userRepo)
 	e:=echo.New()
-	_=api.NewUserController(e,userService)
+	_=api.NewUserController(e,&userService)
+	_=api.NewProjectController(e,&projectService)
 	api.Start(e,":8080")
 
 }
