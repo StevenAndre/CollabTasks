@@ -79,6 +79,9 @@ func  (uc *UserController) Updateuser(c echo.Context) error {
 func (uc *UserController)GetUserByID(c echo.Context) error {
 	ctx := c.Request().Context()
 	userId := c.Param("id_user")
+	if userId==""{
+		return c.JSON(http.StatusBadRequest,responseMessage{Message: "ID bad format"})
+	}
 	us,err:=uc.sv.GetUserById(ctx,userId)
 	if err!=nil{
 		return c.JSON(http.StatusBadRequest,responseMessage{Message: err.Error()})

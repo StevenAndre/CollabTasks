@@ -33,6 +33,9 @@ func (pc *ProjectController) CreateProject(c echo.Context) error {
 func (pc *ProjectController) ListProjectsOfUser(c echo.Context) error {
 	ctx := c.Request().Context()
 	userId := c.Param("id_user")
+	if userId==""{
+		return c.JSON(http.StatusBadRequest, responseMessage{Message: "ID Bad format"})
+	}
 
 	projects, err := pc.sv.GetProjectsByUser(ctx, userId)
 	if err != nil {
@@ -49,6 +52,9 @@ func (pc *ProjectController) ListProjectsOfUser(c echo.Context) error {
 func (pc *ProjectController) ViewProjectByID(c echo.Context) error {
 	ctx := c.Request().Context()
 	projectId := c.Param("id_project")
+	if projectId==""{
+		return c.JSON(http.StatusBadRequest, responseMessage{Message: "ID Bad format"})
+	}
 	project, err := pc.sv.GetProjectByID(ctx, projectId)
 	if err != nil {
 		return c.JSON(http.StatusNotFound, responseMessage{Message: err.Error()})
