@@ -63,21 +63,21 @@ type TeamRepository interface{
 
 type TeamMemberRepository interface{
 	AssignTeam(ctx context.Context, team_member *entity.TeamMember)error
-	RemoveFromTeam(ctx context.Context, member_id string, team_id string)
+	RemoveFromTeam(ctx context.Context, member_id string, team_id string) error
 	GetMembersByTeam(ctx context.Context,team_id string)(*[]entity.User,error)
-	UpdatePositionTeam(ctx context.Context,update_member *entity.TeamMember, id_team,id_member string)
+	UpdatePositionTeam(ctx context.Context,update_position int16, id_team,id_member string) error
 }
 
 
 type AssignedProjectRepository interface{
 	AssignProjectToTeam(ctx context.Context, assigned_project *entity.AssignedProject) error
 	GetProjectsFromTeam(ctx context.Context,id_team string)(*[]entity.Project,error)
-	RemoveProjectFromTeam(ctx context.Context,id_team,id_project string)
+	RemoveProjectFromTeam(ctx context.Context,id_team,id_project string) error
 }
 
 type PrivateMessageRepsoitory interface{
 	SaveMessage(ctx context.Context,message *entity.PrivateMessage)error
-	GetMessagesBetweenUsers(ctx context.Context, sender_id ,receiver_id string)([]entity.PrivateMessage,error)
+	GetMessagesBetweenUsers(ctx context.Context, sender_id ,receiver_id string)(*[]entity.PrivateMessage,error)
 	DeleteMessage(ctx context.Context,pms_id string)error
 	ReadMessage(ctx context.Context,pms_id string) error //update is_read from private messages
 }
