@@ -79,7 +79,7 @@ func (us *UserServiceImpl) GetAllUsers(ctx context.Context) (*[]model.User, erro
 
 func (us *UserServiceImpl) GetUserById(ctx context.Context, userID string) (*model.User, error) {
 	user, err := us.repouser.GetUserByID(ctx, userID)
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -88,29 +88,27 @@ func (us *UserServiceImpl) GetUserById(ctx context.Context, userID string) (*mod
 
 func (us *UserServiceImpl) UpdateUser(ctx context.Context, userDto dtos.UserUpdateDto, userID string, file *multipart.FileHeader) error {
 	usDB, err := us.repouser.GetUserByID(ctx, userID)
-	
+
 	if err != nil {
 		return err
 	}
-	
-	
-	
-	if usDB.Email != userDto.Email{
-		usex,err:=us.repouser.GetUserByEmail(ctx,userDto.Email)
-		if err!=nil{
+
+	if usDB.Email != userDto.Email {
+		usex, err := us.repouser.GetUserByEmail(ctx, userDto.Email)
+		if err != nil {
 			return err
 		}
-		if usex!=nil{
+		if usex != nil {
 			return EmailAlreadyExists
 		}
 	}
 
-	if usDB.Username != userDto.Username{
-		usex,err:=us.repouser.GetUserByUsername(ctx,userDto.Username)
-		if err!=nil{
+	if usDB.Username != userDto.Username {
+		usex, err := us.repouser.GetUserByUsername(ctx, userDto.Username)
+		if err != nil {
 			return err
 		}
-		if usex!=nil{
+		if usex != nil {
 			return UsernameAlreadyExists
 		}
 	}
@@ -121,46 +119,43 @@ func (us *UserServiceImpl) UpdateUser(ctx context.Context, userDto dtos.UserUpda
 	}
 	passwto64 := encryption.ToBase64(psswenb)
 
-	 profilepath := usDB.ProfilePhoto
-	
-	
-		if file != nil {
-			err=deleteFile(profilepath)
-			if err != nil {
-				return err
-			}
-			profilepath, err = saveFile(file)
-			if err != nil {
-				return err
-			}
+	profilepath := usDB.ProfilePhoto
+
+	if file != nil {
+		err = deleteFile(profilepath)
+		if err != nil {
+			return err
 		}
-			u := entity.User{
-				UserID:       usDB.UserID,
-				Username:     userDto.Username,
-				Name:         userDto.Name,
-				Lastname:     userDto.Lastname,
-				Email:        userDto.Email,
-				Password:     passwto64,
-				ProfilePhoto: profilepath,
-			}
-			err = us.repouser.UpdateUser(ctx, &u)
-		
-	return err 
+		profilepath, err = saveFile(file)
+		if err != nil {
+			return err
+		}
+	}
+	u := entity.User{
+		UserID:       usDB.UserID,
+		Username:     userDto.Username,
+		Name:         userDto.Name,
+		Lastname:     userDto.Lastname,
+		Email:        userDto.Email,
+		Password:     passwto64,
+		ProfilePhoto: profilepath,
+	}
+	err = us.repouser.UpdateUser(ctx, &u)
+
+	return err
 }
 
 func (us *UserServiceImpl) DeleteUser(ctx context.Context, userID string) error {
 	usDB, err := us.repouser.GetUserByID(ctx, userID)
-	if err!=nil{
+	if err != nil {
 		return err
 	}
-	err=deleteFile(usDB.ProfilePhoto)
-	if err!=nil{
+	err = deleteFile(usDB.ProfilePhoto)
+	if err != nil {
 		return err
 	}
-	return us.repouser.DeleteUser(ctx,userID)
+	return us.repouser.DeleteUser(ctx, userID)
 }
-
-
 
 func UsernameOrEmailAlreadyExists(ctx context.Context, username, email string, rp repository.UserRepository) error {
 	usEx, err := rp.GetUserByEmail(ctx, email)

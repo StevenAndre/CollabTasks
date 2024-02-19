@@ -22,3 +22,10 @@ type ProjectService interface{
 	GetProjectByID(ctx context.Context,proj_id string) (*model.Project, error)
 	DeleteProject(ctx context.Context, proj_id string) error
 }
+
+type NotificationService interface{
+	SendNotification(ctx context.Context, id_user string, notification *dtos.NotificationDto ) error
+	ListNotificationByUSer(ctx context.Context,id_user string)(*[]model.Notification,error)
+	ReadNotification(ctx context.Context, id_notification string) error
+	DeleteNotification(ctx context.Context, id_motification string)error
+}
