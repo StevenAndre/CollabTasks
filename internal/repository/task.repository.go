@@ -23,7 +23,7 @@ func  (r *GormTaskRepository) CreateTask(ctx context.Context,task *entity.Task)e
 }
 func  (r *GormTaskRepository) GetAllTasksByProject(ctx context.Context,proj_id string) (*[]entity.Task, error){
 	tasks:=&[]entity.Task{}
-	result:=r.db.Where("id_project = ?",proj_id).Find(tasks)
+	result:=r.db.Preload("Users").Where("id_project = ?",proj_id).Find(tasks)
 
 	if result.Error != nil {
 		return nil, result.Error
@@ -33,7 +33,7 @@ func  (r *GormTaskRepository) GetAllTasksByProject(ctx context.Context,proj_id s
 }
 func  (r *GormTaskRepository) GetAllTasksByUser(ctx context.Context,user_id string) (*[]entity.Task, error){
 	tasks:=&[]entity.Task{}
-	result:=r.db.Where("id_user = ?",user_id).Find(tasks)
+	result:=r.db.Preload("Projects").Where("id_user = ?",user_id).Find(tasks)
 	if result.Error!=nil{
 		return nil, result.Error
 	}
@@ -48,7 +48,7 @@ func  (r *GormTaskRepository) CompleteTask(ctx context.Context,task_id string) e
 }
 func  (r *GormTaskRepository) GetTasksUncompleted(ctx context.Context,proj_id string) (*[]entity.Task, error){
 	tasks:=&[]entity.Task{}
-	result:=r.db.Where("id_project = ? AND iscompleted = ?",proj_id,true).Find(tasks)
+	result:=r.db.Where("id_project = ? AND iscompleted = ?",proj_id,true).Preload("Users").Find(tasks)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -58,7 +58,7 @@ func  (r *GormTaskRepository) GetTasksUncompleted(ctx context.Context,proj_id st
 }
 func  (r *GormTaskRepository) GetTasksCompleted(ctx context.Context,proj_id string) (*[]entity.Task, error){
 	tasks:=&[]entity.Task{}
-	result:=r.db.Where("id_project = ? AND iscompleted = ?",proj_id,false).Find(tasks)
+	result:=r.db.Preload("Users").Where("id_project = ? AND iscompleted = ?",proj_id,false).Find(tasks)
 
 	if result.Error != nil {
 		return nil, result.Error

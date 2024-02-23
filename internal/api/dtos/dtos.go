@@ -27,3 +27,8 @@ type NotificationDto struct {
 	Issue   string    `json:"issue" validate:"required"`
 	Message string    `json:"message" validate:"required"`
 }
+
+type  TaskDto struct {
+	Title       string    `json:"title" validate:"required"`
+	Description string    `json:"description" validate:"required"`
+}

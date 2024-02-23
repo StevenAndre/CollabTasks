@@ -29,3 +29,12 @@ type NotificationService interface{
 	ReadNotification(ctx context.Context, id_notification string) error
 	DeleteNotification(ctx context.Context, id_motification string)error
 }
+
+type TaskService interface{
+	RegisterTask(ctx context.Context,taskDto dtos.TaskDto, userID,projectId string)error
+	ListTasksByproject(ctx context.Context,projectId string)(*[]model.TaskU,error)
+	ListTasksByUser(ctx context.Context,projectId string)(*[]model.Task,error)
+	CompleteTask(ctx context.Context, taskId string)error
+	ListTasksUncompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)
+	ListTasksCompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)
+}
