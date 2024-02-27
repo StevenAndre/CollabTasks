@@ -1,7 +1,5 @@
 package dtos
 
-
-
 type UserResisterDto struct {
 	Name     string `json:"name" validate:"required"`
 	Lastname string `json:"lastname" validate:"required"`
@@ -24,11 +22,15 @@ type ProjectDto struct {
 }
 
 type NotificationDto struct {
-	Issue   string    `json:"issue" validate:"required"`
-	Message string    `json:"message" validate:"required"`
+	Issue   string `json:"issue" validate:"required"`
+	Message string `json:"message" validate:"required"`
 }
 
-type  TaskDto struct {
-	Title       string    `json:"title" validate:"required"`
-	Description string    `json:"description" validate:"required"`
+type TaskDto struct {
+	Title       string `json:"title" validate:"required"`
+	Description string `json:"description" validate:"required"`
+}
+
+type EvidenceDto struct {
+	Comment string `json:"comment" validate:"required"`
 }

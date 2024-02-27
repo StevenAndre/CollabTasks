@@ -38,3 +38,10 @@ type TaskService interface{
 	ListTasksUncompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)
 	ListTasksCompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)
 }
+
+type EvidenceService interface {
+	RegisterEvidence(ctx context.Context,evidenceDto dtos.NotificationDto,taskID string, file *multipart.FileHeader) error
+	ShowEvidenceByID(ctx context.Context,evidenceID string)(*model.Evidence,error)
+	ViewEvidencesByTask(ctx context.Context,taskID string)(*[]model.Evidence,error)
+	DeleteEvidence(ctx context.Context,taskID string) error
+}
