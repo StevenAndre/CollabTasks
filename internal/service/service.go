@@ -33,7 +33,7 @@ type NotificationService interface{
 type TaskService interface{
 	RegisterTask(ctx context.Context,taskDto dtos.TaskDto, userID,projectId string)error
 	ListTasksByproject(ctx context.Context,projectId string)(*[]model.TaskU,error)
-	ListTasksByUser(ctx context.Context,projectId string)(*[]model.Task,error)
+	ListTasksByUser(ctx context.Context,userID string)(*[]model.Task,error)
 	CompleteTask(ctx context.Context, taskId string)error
 	ListTasksUncompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)
 	ListTasksCompleted(ctx context.Context,projectId string) (*[]model.TaskU,error)

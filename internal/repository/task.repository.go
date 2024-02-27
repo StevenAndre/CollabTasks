@@ -66,3 +66,14 @@ func  (r *GormTaskRepository) GetTasksCompleted(ctx context.Context,proj_id stri
 
 	return tasks,nil
 }
+
+func  (r *GormTaskRepository)GetTaskByID(ctx context.Context,taskId string) (*entity.Task, error){
+	task:=&entity.Task{
+		TaskID: taskId,
+	}
+	result:=r.db.First(task)
+	if result.Error!=nil{
+		return nil,result.Error
+	}
+	return task,nil
+}

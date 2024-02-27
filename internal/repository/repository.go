@@ -37,6 +37,7 @@ type TaskRepository interface{
 	CompleteTask(ctx context.Context,task_id string) error
 	GetTasksUncompleted(ctx context.Context,proj_id string) (*[]entity.Task, error)
 	GetTasksCompleted(ctx context.Context,proj_id string) (*[]entity.Task, error)
+	GetTaskByID(ctx context.Context,taskId string) (*entity.Task, error)
 }
 
 
