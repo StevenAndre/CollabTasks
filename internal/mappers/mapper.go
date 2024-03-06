@@ -7,3 +7,5 @@ type ProjectMapper struct{}
 type NotificationMapper struct{}
 
 type TaskMapper struct{}
+
+type EvidenceMapper struct{}
