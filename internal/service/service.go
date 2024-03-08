@@ -45,3 +45,11 @@ type EvidenceService interface {
 	ViewEvidencesByTask(ctx context.Context,taskID string)(*[]model.Evidence,error)
 	DeleteEvidence(ctx context.Context,evidenceID string) error
 }
+
+type PositionsService interface{
+	RegisterPosition(ctx context.Context, position dtos.PositionDto)error
+	GetPositionByID(ctx  context.Context,positionID int16)(*model.Position,error)
+	GetAllPositions(ctx context.Context) (*[]model.Position,error)
+	UpdatePosition(ctx context.Context,positionID int16,position dtos.PositionDto)error
+	RemovePosition(ctx context.Context,positionID int16)error
+}

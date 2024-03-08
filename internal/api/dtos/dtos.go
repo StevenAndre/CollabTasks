@@ -34,3 +34,9 @@ type TaskDto struct {
 type EvidenceDto struct {
 	Comment string `json:"comment" validate:"required"`
 }
+type PositionDto struct{
+	Name string `json:"name" validate:"required"`
+	Description string `json:"description" validate:"required"`
+}
+
+

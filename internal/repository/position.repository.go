@@ -11,53 +11,44 @@ type GormPositionRepository struct {
 	db *gorm.DB
 }
 
-func NewGormPositionRepository (db *gorm.DB) PositionRepository{
+func NewGormPositionRepository(db *gorm.DB) PositionRepository {
 	return &GormPositionRepository{db: db}
 }
 
-func (por * GormPositionRepository) CreatePosition(ctx context.Context,position *entity.Position) error{
-	result:=por.db.Create(position)
+func (por *GormPositionRepository) CreatePosition(ctx context.Context, position *entity.Position) error {
+	result := por.db.Create(position)
 	return result.Error
 }
 
-func (por * GormPositionRepository) GetPositionById(ctx context.Context,position_id int16)(*entity.Position,error){
-	position:=&entity.Position{
+func (por *GormPositionRepository) GetPositionById(ctx context.Context, position_id int16) (*entity.Position, error) {
+	position := &entity.Position{
 		PositionID: position_id,
 	}
-	result:=por.db.First(position)
-	if result.Error!=nil{
-		return nil,result.Error
+	result := por.db.First(position)
+	if result.Error != nil {
+		return nil, result.Error
 	}
-	return position,nil
+	return position, nil
 }
 
-func (por * GormPositionRepository) GetAllPositions(ctx context.Context)(*[]entity.Position,error){
-	positions:=&[]entity.Position{}
-	result:=por.db.Find(positions)
-	if result.Error!=nil{
-		return nil,result.Error
+func (por *GormPositionRepository) GetAllPositions(ctx context.Context) (*[]entity.Position, error) {
+	positions := &[]entity.Position{}
+	result := por.db.Find(positions)
+	if result.Error != nil {
+		return nil, result.Error
 	}
-	return positions,nil
+	return positions, nil
 }
 
-func (por * GormPositionRepository) UpdatePosition(ctx context.Context, position_id int16, newPosition *entity.Position) error{
-	positionDB:=&entity.Position{
-		PositionID: position_id,
-	}
-	result:=por.db.First(positionDB)
-	if result.Error!=nil{
-		return result.Error
-	}
-	positionDB.Description=newPosition.Description
-	positionDB.Name=newPosition.Name
-	result=por.db.Save(positionDB)
+func (por *GormPositionRepository) UpdatePosition(ctx context.Context, newPosition *entity.Position) error {
+	result := por.db.Save(newPosition)
 	return result.Error
 }
 
-func (por * GormPositionRepository) DeletePosition(ctx context.Context, position_id int16) error{
-	position:=&entity.Position{
+func (por *GormPositionRepository) DeletePosition(ctx context.Context, position_id int16) error {
+	position := &entity.Position{
 		PositionID: position_id,
 	}
-	result:=por.db.Delete(position)
+	result := por.db.Delete(position)
 	return result.Error
 }

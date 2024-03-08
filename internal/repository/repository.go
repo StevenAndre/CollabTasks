@@ -52,7 +52,7 @@ type PositionRepository interface{
 	CreatePosition(ctx context.Context,position *entity.Position) error
 	GetPositionById(ctx context.Context,position_id int16)(*entity.Position,error)
 	GetAllPositions(ctx context.Context)(*[]entity.Position,error)
-	UpdatePosition(ctx context.Context, position_id int16, newPosition *entity.Position) error
+	UpdatePosition(ctx context.Context, newPosition *entity.Position) error
 	DeletePosition(ctx context.Context, position_id int16) error
 }
 

@@ -9,3 +9,5 @@ type NotificationMapper struct{}
 type TaskMapper struct{}
 
 type EvidenceMapper struct{}
+
+type PositionMapper struct{}
