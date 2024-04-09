@@ -39,4 +39,8 @@ type PositionDto struct{
 	Description string `json:"description" validate:"required"`
 }
 
+type TeamDto struct{
+	Name string `json:"name" validate:"required"`
+}
+
 

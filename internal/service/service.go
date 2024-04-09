@@ -53,3 +53,9 @@ type PositionsService interface{
 	UpdatePosition(ctx context.Context,positionID int16,position dtos.PositionDto)error
 	RemovePosition(ctx context.Context,positionID int16)error
 }
+
+type TeamService interface{
+	RegisterTeam(ctx context.Context,teamDto dtos.TeamDto)error
+	GetTeamByID(ctx context.Context, teamID string) (*model.Team,error)
+	DeleteTeam(ctx context.Context, teamID string)error
+}

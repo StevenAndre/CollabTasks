@@ -11,3 +11,6 @@ type TaskMapper struct{}
 type EvidenceMapper struct{}
 
 type PositionMapper struct{}
+
+type TeamMapper struct{}
+
