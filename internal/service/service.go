@@ -59,3 +59,10 @@ type TeamService interface{
 	GetTeamByID(ctx context.Context, teamID string) (*model.Team,error)
 	DeleteTeam(ctx context.Context, teamID string)error
 }
+
+type TeamMemberService interface{
+	AssignTeam(ctx context.Context,teammemberDto dtos.TeamMemberDto) error
+	RemoveTeamMember(ctx context.Context,memberID, teamID string)error
+	GetMemberByTeam(ctx context.Context, teamID string)(*[]model.User,error)
+	UpdatePositionTeam(ctx context.Context,update_position int16, id_team,id_member string) error
+}
