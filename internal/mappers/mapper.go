@@ -14,3 +14,5 @@ type PositionMapper struct{}
 
 type TeamMapper struct{}
 
+type TeamMemberMapper struct{}
+
