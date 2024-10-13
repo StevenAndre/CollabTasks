@@ -3,7 +3,6 @@ package service
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"os"
@@ -59,7 +58,7 @@ func deleteFile(filename string) error {
 
 func GetFile(filename string)([]byte, error){
 
-	filebytes,err:=ioutil.ReadFile(pathImages+filename)
+	filebytes,err:=os.ReadFile(pathImages+filename)
 	if err!=nil{
 		return nil,err
 	}
